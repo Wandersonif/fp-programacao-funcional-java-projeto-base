@@ -20,4 +20,7 @@ public abstract class Aula {
         generator = new StudentGenerator(DEFAULT_SEED);
         estudantes = generator.generate(TOTAL_ESTUDANTES);
     }
+    public List<Estudante> getEstudantes() {
+        return estudantes;
+    }
 }
