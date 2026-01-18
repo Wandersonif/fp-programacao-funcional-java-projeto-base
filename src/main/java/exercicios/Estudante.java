@@ -1,12 +1,16 @@
 package exercicios;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Representa um aluno em uma instituição de ensino.
  * Classe baseada no exemplo do <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:145:0::::P145_EVENT_ID,P145_PREV_PAGE:4887,143">exercicios.Curso JDK 8 MOOC: Lambdas and Streams Introduction</a>.
  *
  * @author Manoel Campos da Silva Filho
  */
-public class Estudante {
+public class Estudante  implements Comparable<Estudante>{
+    public boolean hasNota;
+    public boolean isHomem;
     private int id;
     private String nome;
     private char sexo;
@@ -122,5 +126,15 @@ public class Estudante {
 
     public boolean isAprovado(){
         return nota >= 6;
+    }
+
+    public boolean hasNota(){return nota > 0;}
+
+    @Override
+    public int compareTo(Estudante o) {
+        if(o == null)
+            return 1;
+
+        return Double.compare(this.nota, o.nota);
     }
 }
