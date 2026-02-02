@@ -13,4 +13,5 @@ package exercicios;
  * @see <a href="https://docs.oracle.com/en/java/javase/16/language/records.html">Records</a>
  */
 public record Sensor (double temperatura, double umidade) {
+
 }
