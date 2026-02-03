@@ -126,6 +126,15 @@ public class CodigoFuncionalRuim {
      * Por fim, usar a versão com 3 parâmetros.
      */
     private void correcao1() {
+        var totalCidadesMap =
+                listaCidadesPorLetraInicial
+                    .stream()
+                    .collect(
+                            toMap(
+                                    cidades -> cidades.getFirst().charAt(0),
+                                    List::size,
+                                    Integer::sum));
+        System.out.println("Total de cidades por letra: " + totalCidadesMap);
 
     }
 
@@ -174,7 +183,9 @@ public class CodigoFuncionalRuim {
      * @see #codigoRuim3()
      */
     private void correcao2and3() {
-
+        var totalCidadesList =
+                listaCidadesPorLetraInicial.stream().map(List::size).toList();
+        System.out.println("Total de cidades em cadas grupo: "+ totalCidadesList);
     }
 
     /**
