@@ -36,7 +36,7 @@ public class CodigoFuncionalRuim {
      * O total de elementos em cada lista interna indica o tipo de polígono,
      * como triângulo, qudrilátero, pentágono, etc.
      */
-    private final List<List<Integer>> distanciasPoligonos = List.of(
+    private final List<List<Integer>> pontosPoligonos = List.of(
             List.of(10, 10, 10),
             List.of(25, 25, 25),
             List.of(20, 10, 20, 10),
@@ -45,17 +45,17 @@ public class CodigoFuncionalRuim {
     );
 
     public CodigoFuncionalRuim() {
-        codigoRuim1();
-        correcao1();
-
-        System.out.println();
-        codigoRuim2();
-        codigoRuim3();
-        correcao2and3();
-
-        System.out.println();
-        codigoRuim4();
-        correcao4();
+//        codigoRuim1();
+//        correcao1();
+//
+//        System.out.println();
+//        codigoRuim2();
+//        codigoRuim3();
+//        correcao2and3();
+//
+//        System.out.println();
+//        codigoRuim4();
+//        correcao4();
 
         System.out.println();
         codigoRuim5();
@@ -76,6 +76,16 @@ public class CodigoFuncionalRuim {
 
     public static void main(String[] args) {
         new CodigoFuncionalRuim();
+    }
+
+    private static String tipoPoligono(List<Integer> distancias) {
+        return switch (distancias.size()) {
+            case 3 -> "Triângulo";
+            case 4 -> "Quadrilátero";
+            case 5 -> "Pentágono";
+            case 6 -> "Hexágono";
+            default -> "Polígono de %d lados".formatted(distancias.size());
+        };
     }
 
     /**
@@ -200,7 +210,7 @@ public class CodigoFuncionalRuim {
      */
     private void codigoRuim4() {
         var nomePoligonos =
-            distanciasPoligonos
+            pontosPoligonos
               .stream()
               .map(distancias -> {
                  switch (distancias.size()) {
@@ -222,7 +232,13 @@ public class CodigoFuncionalRuim {
      * @see #codigoRuim4()
      */
     private void correcao4() {
+        var nomePoligonos =
+                pontosPoligonos
+                        .stream()
+                        .map(CodigoFuncionalRuim::tipoPoligono)
+                        .toList();
 
+        System.out.println("Tipos de polígonos: " + nomePoligonos);
     }
 
     /**
@@ -235,8 +251,8 @@ public class CodigoFuncionalRuim {
      */
     private void codigoRuim5() {
         var list =
-              Stream.of(distanciasPoligonos)
-                    .filter(distancias -> distancias.size() >= 4)
+              Stream.of(pontosPoligonos)
+                    .filter(pontos -> pontos.size() >= 4)
                     .toList();
         System.out.println("Polígonos com mais de 3 lados: " + list);
     }
@@ -247,6 +263,11 @@ public class CodigoFuncionalRuim {
      * @see #codigoRuim5()
      */
     private void correcao5() {
+        var list =
+                pontosPoligonos.stream()
+                        .filter(poligonos -> poligonos.size() >= 4)
+                        .toList();
+        System.out.println("Polígonos com mais de 3 lados: " + list);
 
     }
 
@@ -258,7 +279,7 @@ public class CodigoFuncionalRuim {
      */
     private void codigoRuim6_1() {
         var perimetrosList =
-                distanciasPoligonos.stream().flatMap(distancias -> {
+                pontosPoligonos.stream().flatMap(distancias -> {
                     var perimetro = 0;
                     for (Integer distancia : distancias) {
                         perimetro += distancia;
@@ -279,7 +300,7 @@ public class CodigoFuncionalRuim {
      */
     private void codigoRuim6_2() {
         var perimetrosList =
-                distanciasPoligonos
+                pontosPoligonos
                     .stream()
                     .flatMap(distancias -> {
                         var perimetro = distancias.stream().mapToInt(d -> d).sum();
@@ -298,6 +319,13 @@ public class CodigoFuncionalRuim {
      * @see #codigoRuim6_2()
      */
     private void correcao6() {
+        var perimetrosList =
+                pontosPoligonos.stream()
+                        .flatMap(
+                                distancias -> distancias.stream().reduce(Integer::sum).stream())
+                        .toList();
+
+        System.out.println("Perímetros: " + perimetrosList);
 
     }
 
